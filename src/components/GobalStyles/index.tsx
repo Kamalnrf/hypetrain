@@ -4,7 +4,7 @@
   https://piccalil.li/blog/a-modern-css-reset/
 */
 
-import { createGlobalStyle } from 'styled-components';
+import {createGlobalStyle} from 'styled-components'
 
 const GlobalStyles = createGlobalStyle`
   *, *::before, *::after {
@@ -19,6 +19,10 @@ const GlobalStyles = createGlobalStyle`
     height: 100%;
   }
 
+  html {
+    color-scheme: light dark;
+  }
+
   html:focus-within {
     scroll-behavior: smooth;
   }
@@ -27,6 +31,9 @@ const GlobalStyles = createGlobalStyle`
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeSpeed;
+    font-family: var(--font-family);
+    font-weight: var(--font-weight-light);
+    font-size: 115%;
   }
 
   img, picture, video, canvas, svg {
@@ -69,6 +76,16 @@ const GlobalStyles = createGlobalStyle`
       scroll-behavior: auto !important;
     }
   }
-`;
 
-export default GlobalStyles;
+  /* CSS Variables */
+  :root {
+    --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+      Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+      'Segoe UI Symbol';
+    --font-weight-bold: 500;
+    --font-weight-medium: 400;
+    --font-weight-light: 300;
+  }
+`
+
+export default GlobalStyles
