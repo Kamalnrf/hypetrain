@@ -1,11 +1,14 @@
 import React from 'react'
 import GlobalStyles from '../GobalStyles'
+import {BrowserRouter} from 'react-router-dom'
+import AppRoutes from '../AppRouter'
 
-function App() {
-  return <>
-    <h1>Hypetrain</h1>
-    <GlobalStyles />
-  </>
+export default function App() {
+  return (
+    <BrowserRouter>
+      <h1>Hypetrain</h1>
+      <AppRoutes />
+      <GlobalStyles />
+    </BrowserRouter>
+  )
 }
-
-export default App
