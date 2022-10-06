@@ -79,13 +79,43 @@ const GlobalStyles = createGlobalStyle`
 
   /* CSS Variables */
   :root {
-    --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    --font-family: 'Wotfard', Futura, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
       Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
       'Segoe UI Symbol';
     --font-weight-bold: 500;
     --font-weight-medium: 400;
     --font-weight-light: 300;
   }
+
+  /* Font Faces */
+  @font-face {
+    font-family: 'Wotfard';
+    src: url('/fonts/wotfard-regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'Wotfard';
+    src: url('/fonts/wotfard-medium.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'Wotfard';
+    src: url('/fonts/wotfard-semibold.woff2') format('woff2');
+    font-weight: 600;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'Wotfard';
+    src: url('/fonts/wotfard-bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+  }
+
 `
 
 export {GlobalStyles}
