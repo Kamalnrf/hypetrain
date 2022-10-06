@@ -1,6 +1,6 @@
 import SignInButton from '../components/SignInButton'
 
-export default function LandingPage() {
+export default function Landing() {
   return (
     <>
       <SignInButton />
