@@ -28,7 +28,7 @@ export default function CallBackPage() {
   const params = new URLSearchParams(location.search)
   const code = params.get('code')
   const navigate = useNavigate()
-  const {setUser} = useUser()
+  const {setUserDetails} = useUser()
 
   useEffect(() => {
     const createUser = () => {
@@ -45,8 +45,7 @@ export default function CallBackPage() {
         .then(res => res.json())
         .then((res: CreateUserResponse) => {
           if (res.success) {
-            localStorage.setItem('user', JSON.stringify(res.data))
-            setUser(res.data)
+            setUserDetails(res.data)
             navigate(`/${res.data.username}`)
           }
         })
@@ -55,7 +54,7 @@ export default function CallBackPage() {
     if (code) {
       createUser()
     }
-  }, [code, setUser, navigate])
+  }, [code, setUserDetails, navigate])
 
   if (!Boolean(code)) {
     return <p>Authorization Failed</p>
