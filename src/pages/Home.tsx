@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import '@fontsource/bungee-shade'
 
 export default function Home() {
-  const {name, logout} = useUser()
+  const {logout, username} = useUser()
   const tweetIntent =
     'https://twitter.com/intent/tweet?text=yo%2C%20you%20should%20all%20get%20onboard%20the%20hypetrain%21%20cool%20stuff%20%3A%29'
   return (
@@ -12,7 +12,7 @@ export default function Home() {
       <Greetings>
         Hello,
         <Newline />
-        <Name>{name}!</Name>
+        <Name>@{username}!</Name>
       </Greetings>
       <InteractiveText>
         Welcome to the circus. Did you change your mind about retweeting and

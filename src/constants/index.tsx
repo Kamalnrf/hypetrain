@@ -1,3 +1,6 @@
+export const USER_LOCAL_STORAGE = 'user'
+export const TOKEN_LOCAL_STORAGE = 'user_token'
+
 export const BREAKPOINTS = {
   tabletMin: 540,
   laptopMin: 1100,
