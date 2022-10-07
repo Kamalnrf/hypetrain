@@ -1,5 +1,6 @@
 import {createContext, useState, useContext, useLayoutEffect} from 'react'
 import {useNavigate} from 'react-router-dom'
+import {client} from '../../utils/api'
 
 type UserDetails = {
   name: string
@@ -37,20 +38,16 @@ function UserProvider({children}: Props) {
 
   useLayoutEffect(() => {
     if (token) {
-      fetch('https://dark-night-380.fly.dev/api/me', {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-        .then(res => res.json())
-        .then((res: {data: UserDetails}) => {
-          setUser(res.data)
-          localStorage.setItem('user', JSON.stringify(res.data))
+      client<UserDetails>('me')
+        .then(res => {
+          if (res.success) {
+            setUser(res.data)
+            localStorage.setItem('user', JSON.stringify(res))
+          }
         })
         .catch(console.error)
     }
-  }, [token, setUser, user])
+  }, [token, setUser])
 
   const logout = () => {
     setUser({})
