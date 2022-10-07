@@ -4,15 +4,20 @@ import {UserProvider} from '../UserProvider'
 import {AppRouter as Router} from '../AppRouter'
 import {Footer} from '../Footer'
 import {BrowserRouter} from 'react-router-dom'
+import {QueryClient, QueryClientProvider} from 'react-query'
+
+const queryClient = new QueryClient()
 
 function App() {
   return (
     <BrowserRouter>
-      <UserProvider>
-        <Router />
-        <Footer />
-        <GlobalStyles />
-      </UserProvider>
+      <QueryClientProvider client={queryClient}>
+        <UserProvider>
+          <Router />
+          <Footer />
+          <GlobalStyles />
+        </UserProvider>
+      </QueryClientProvider>
     </BrowserRouter>
   )
 }

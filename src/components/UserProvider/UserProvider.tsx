@@ -1,6 +1,9 @@
-import {createContext, useState, useContext, useLayoutEffect} from 'react'
+import {createContext, useState, useContext, useCallback} from 'react'
 import {useNavigate} from 'react-router-dom'
 import {client} from '../../utils/api'
+import {getUserToken} from '../../utils/getUserToken'
+import {TOKEN_LOCAL_STORAGE, USER_LOCAL_STORAGE} from '../../constants'
+import {useQuery} from 'react-query'
 
 type UserDetails = {
   name: string
@@ -21,41 +24,38 @@ const UserConext = createContext<null | ContextValues>(null)
 
 function UserProvider({children}: Props) {
   const navigate = useNavigate()
-  const tokenInLocalStorage = localStorage.getItem('user_token')
+  const token = getUserToken()
   const userLocalStorage = JSON.parse(localStorage.getItem('user') ?? '{}')
-  const [token, setToken] = useState(tokenInLocalStorage)
-  const [user, setUser] = useState<UserDetails | {}>(userLocalStorage)
+  const [user, setUser] = useState<UserDetails | null>(userLocalStorage)
 
-  const setUserDetails = ({
-    token,
-    ...userDetails
-  }: UserDetails & {token: string}) => {
-    localStorage.setItem('user', JSON.stringify(userDetails))
-    localStorage.setItem('user_token', token)
-    setToken(token)
-    setUser(userDetails)
-  }
+  const setUserDetails = useCallback(
+    ({token, ...userDetails}: UserDetails & {token?: string}) => {
+      if (token) {
+        localStorage.setItem(TOKEN_LOCAL_STORAGE, token)
+      }
+      localStorage.setItem(USER_LOCAL_STORAGE, JSON.stringify(userDetails))
+      setUser(userDetails)
+    },
+    [setUser],
+  )
 
-  useLayoutEffect(() => {
-    if (token) {
-      client<UserDetails>('me')
-        .then(res => {
-          if (res.success) {
-            setUser(res.data)
-            localStorage.setItem('user', JSON.stringify(res))
-          }
-        })
-        .catch(console.error)
-    }
-  }, [token, setUser])
-
-  const logout = () => {
-    setUser({})
-    setToken('')
-    localStorage.removeItem('user_token')
-    localStorage.removeItem('user')
+  const logout = useCallback(() => {
+    setUser(null)
+    localStorage.removeItem(TOKEN_LOCAL_STORAGE)
+    localStorage.removeItem(USER_LOCAL_STORAGE)
     navigate('/')
-  }
+  }, [setUser, navigate])
+
+  useQuery('user_details', () => client<UserDetails>('me'), {
+    onSuccess: res => {
+      if (res.success) {
+        setUserDetails(res.data)
+      } else if (res.error.code === 'invalid_token') {
+        logout()
+      }
+    },
+    enabled: Boolean(token),
+  })
 
   const value = {
     ...(user ?? {}),
