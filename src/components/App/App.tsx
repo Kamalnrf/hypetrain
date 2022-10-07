@@ -3,15 +3,17 @@ import {GlobalStyles} from '../GobalStyles'
 import {UserProvider} from '../UserProvider'
 import {AppRouter as Router} from '../AppRouter'
 import {Footer} from '../Footer'
+import {BrowserRouter} from 'react-router-dom'
 
 function App() {
   return (
-    <UserProvider>
-      <h1>Hypetrain</h1>
-      <Router />
-      <Footer />
-      <GlobalStyles />
-    </UserProvider>
+    <BrowserRouter>
+      <UserProvider>
+        <Router />
+        <Footer />
+        <GlobalStyles />
+      </UserProvider>
+    </BrowserRouter>
   )
 }
 
