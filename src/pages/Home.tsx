@@ -49,6 +49,7 @@ const Name = styled.div`
 
 const InteractiveText = styled.p`
   font-size: calc(26 / 16 * 1rem);
+  font-weight: 300;
   line-height: 2;
   margin-block-end: 36px;
 `
