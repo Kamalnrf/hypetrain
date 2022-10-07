@@ -5,8 +5,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "test:coverage": "yarn test -- --coverage --watchAll=false --passWithNoTests",
+    "test": "react-scripts test --passWithNoTests",
+    "test:coverage": "yarn test -- --coverage --watchAll=false",
     "test:debug": "react-scripts --inspect-brk test --runInBand --no-cache",
     "eject": "react-scripts eject",
     "prepare": "husky install",
