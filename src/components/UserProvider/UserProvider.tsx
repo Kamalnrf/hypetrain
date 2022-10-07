@@ -1,15 +1,16 @@
-import {createContext, useState, useContext} from 'react'
+import {createContext, useState, useContext, useLayoutEffect} from 'react'
+import {useNavigate} from 'react-router-dom'
 
 type UserDetails = {
   name: string
-  token: string
   username: string
 }
 
 type ContextValues = {
   isUserSignedIn: boolean
-  setUserDetails: (userDetails: UserDetails) => void
-} & UserDetails
+  setUserDetails: (userDetails: UserDetails & {token: string}) => void
+  logout: () => void
+} & Partial<UserDetails>
 
 type Props = {
   children: React.ReactNode
@@ -18,18 +19,52 @@ type Props = {
 const UserConext = createContext<null | ContextValues>(null)
 
 function UserProvider({children}: Props) {
-  const userInLocalStorage = JSON.parse(localStorage.getItem('user') ?? '{}')
-  const [user, setUser] = useState<UserDetails>(userInLocalStorage)
+  const navigate = useNavigate()
+  const tokenInLocalStorage = localStorage.getItem('user_token')
+  const userLocalStorage = JSON.parse(localStorage.getItem('user') ?? '{}')
+  const [token, setToken] = useState(tokenInLocalStorage)
+  const [user, setUser] = useState<UserDetails | {}>(userLocalStorage)
 
-  const setUserDetails = (userDetails: UserDetails) => {
+  const setUserDetails = ({
+    token,
+    ...userDetails
+  }: UserDetails & {token: string}) => {
     localStorage.setItem('user', JSON.stringify(userDetails))
+    localStorage.setItem('user_token', token)
+    setToken(token)
     setUser(userDetails)
   }
 
+  useLayoutEffect(() => {
+    if (token) {
+      fetch('https://dark-night-380.fly.dev/api/me', {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+        .then(res => res.json())
+        .then((res: {data: UserDetails}) => {
+          setUser(res.data)
+          localStorage.setItem('user', JSON.stringify(res.data))
+        })
+        .catch(console.error)
+    }
+  }, [token, setUser, user])
+
+  const logout = () => {
+    setUser({})
+    setToken('')
+    localStorage.removeItem('user_token')
+    localStorage.removeItem('user')
+    navigate('/')
+  }
+
   const value = {
-    ...user,
-    isUserSignedIn: Boolean(user.token),
+    ...(user ?? {}),
+    isUserSignedIn: Boolean(token),
     setUserDetails,
+    logout,
   }
 
   return <UserConext.Provider value={value}>{children}</UserConext.Provider>
