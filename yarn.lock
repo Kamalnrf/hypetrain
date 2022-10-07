@@ -1229,6 +1229,11 @@
     minimatch "^3.1.2"
     strip-json-comments "^3.1.1"
 
+"@fontsource/bungee-shade@^4.5.10":
+  version "4.5.10"
+  resolved "https://registry.yarnpkg.com/@fontsource/bungee-shade/-/bungee-shade-4.5.10.tgz#52304513b4e2877b56f69946e011080ad17fbc39"
+  integrity sha512-sWGOtul91yQN7ft2H1iMZa8tEW4d79l/y16gqz6USnSbepesBF72UmLS+uRYxak97DQmR/RwuA2f8hJODlbU1A==
+
 "@humanwhocodes/config-array@^0.10.4":
   version "0.10.4"
   resolved "https://registry.yarnpkg.com/@humanwhocodes/config-array/-/config-array-0.10.4.tgz#01e7366e57d2ad104feea63e72248f22015c520c"
