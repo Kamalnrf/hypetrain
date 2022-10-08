@@ -7,18 +7,20 @@ type Options = {
   headers?: Record<string, unknown>
 } & Omit<RequestInit, 'body'>
 
-type Response<TData> =
-  | {
-      success: true
-      data: TData
-    }
-  | {
-      success: false
-      error: {
-        code?: string
-        message?: string
-      }
-    }
+export type ErrorResponse = {
+  success: false
+  error: {
+    code?: string
+    message?: string
+  }
+}
+
+export type SuccessResponse<TData> = {
+  success: true
+  data: TData
+}
+
+export type Response<TData> = SuccessResponse<TData> | ErrorResponse
 
 async function client<TResponse>(
   path: string,
@@ -30,9 +32,10 @@ async function client<TResponse>(
     method: Boolean(options?.data) ? 'POST' : 'GET',
     headers: {
       Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
       ...headers,
     },
-    body: options?.data ? JSON.stringify(options?.data) : null,
+    body: Boolean(options?.data) ? JSON.stringify(options?.data) : null,
     ...config,
   }
 
