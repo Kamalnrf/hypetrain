@@ -4,7 +4,7 @@ const BASE_PATH = process.env.REACT_APP_API_BASE_PATH
 
 type Options = {
   data: Record<string, unknown>
-  headers: Record<string, unknown>
+  headers?: Record<string, unknown>
 } & Omit<RequestInit, 'body'>
 
 type Response<TData> =
