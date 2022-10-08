@@ -1,21 +1,9 @@
 import {useLocation, useNavigate} from 'react-router-dom'
-import {useEffect} from 'react'
 import {useUser} from '../components/UserProvider'
-
-type ErrorResponse = {
-  success: false
-  code?: string
-  error?: {
-    message?: string
-  }
-}
-
-type SusscessResponse = {
-  success: true
-  data: UserData
-}
-
-type CreateUserResponse = SusscessResponse | ErrorResponse
+import {client, ErrorResponse, Response} from '../utils/api'
+import {MaxWidthWrapper} from '../components/MaxWidthWrapper'
+import {useQuery} from 'react-query'
+import {SignInButton} from '../components/SignInButton'
 
 type UserData = {
   name: string
@@ -30,40 +18,46 @@ export default function CallBackPage() {
   const navigate = useNavigate()
   const {setUserDetails} = useUser()
 
-  useEffect(() => {
-    const createUser = () => {
-      console.log('CODE =>', code)
-      fetch('https://dark-night-380.fly.dev/api/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          code,
-        }),
-      })
-        .then(res => res.json())
-        .then((res: CreateUserResponse) => {
-          if (res.success) {
-            setUserDetails(res.data)
-            navigate(`/${res.data.username}`)
-          }
-        })
-    }
+  const {isSuccess, isLoading, isError, error} = useQuery<
+    Response<UserData>,
+    ErrorResponse
+  >(
+    'twitter-authorization-code',
+    () =>
+      client<UserData>('register', {
+        data: {code},
+      }),
+    {
+      onSuccess: res => {
+        if (res.success) {
+          setUserDetails(res.data)
+          navigate(`/${res.data.username}`)
+        }
+      },
+      enabled: Boolean(code),
+    },
+  )
 
-    if (code) {
-      createUser()
-    }
-  }, [code, setUserDetails, navigate])
-
-  if (!Boolean(code)) {
-    return <p>Authorization Failed</p>
-  }
+  console.log(isSuccess, isLoading, error)
 
   return (
-    <div>
-      <h1>Authorization</h1>
-      <p>{code}</p>
-    </div>
+    <MaxWidthWrapper>
+      {isLoading ? (
+        <h1>Completing Authorization</h1>
+      ) : (
+        <h1>
+          {isSuccess ? 'Authorization Compeleted' : 'Authorziation Failed'}
+        </h1>
+      )}
+      {isError ? (
+        <div>
+          <p>{error.error.message}</p>
+          <p>Try Signing in with Twitter Again</p>
+          <SignInButton />
+        </div>
+      ) : (
+        <></>
+      )}
+    </MaxWidthWrapper>
   )
 }
