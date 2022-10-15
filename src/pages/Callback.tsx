@@ -25,7 +25,7 @@ export default function CallBackPage() {
     'twitter-authorization-code',
     () =>
       client<UserData>('register', {
-        data: {code, redirectURI: process.env.REACT_APP_TWITTER_REDIRECT_URI},
+        data: {code, redirect_uri: process.env.REACT_APP_TWITTER_REDIRECT_URI},
       }),
     {
       onSuccess: res => {
