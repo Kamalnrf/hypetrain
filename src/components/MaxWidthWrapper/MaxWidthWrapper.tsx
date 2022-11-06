@@ -1,13 +1,12 @@
 import styled from 'styled-components'
 
-// const MaxWidthWrapper = (props: any) => {
-//   return <Container {...props} />
-// }
-
 const MaxWidthWrapper = styled.div`
-  width: 650px;
+  position: relative;
+  width: 100%;
   height: 100%;
+  max-width: 650px;
   margin: 0 auto;
+  padding: 0 32px;
 `
 
 export {MaxWidthWrapper}

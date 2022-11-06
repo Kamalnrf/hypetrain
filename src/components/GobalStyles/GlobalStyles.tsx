@@ -20,7 +20,7 @@ const GlobalStyles = createGlobalStyle`
   }
 
   html {
-    color-scheme: light dark;
+    color-scheme: dark;
   }
 
   html:focus-within {
@@ -32,8 +32,9 @@ const GlobalStyles = createGlobalStyle`
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeSpeed;
     font-family: var(--font-family);
-    font-weight: var(--font-weight-light);
+    font-weight: var(--font-weight-regular);
     font-size: 115%;
+    background-color: var(--background-color);
   }
 
   img, picture, video, canvas, svg {
@@ -58,8 +59,9 @@ const GlobalStyles = createGlobalStyle`
     overflow-wrap: break-word;
   }
 
-  #root, #__next {
+  #root {
     isolation: isolate;
+    height: 100%;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -79,43 +81,36 @@ const GlobalStyles = createGlobalStyle`
 
   /* CSS Variables */
   :root {
+    /* Fonts */
     --font-family: 'Wotfard', Futura, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
       Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
       'Segoe UI Symbol';
-    --font-weight-bold: 500;
-    --font-weight-medium: 400;
+    --font-weight-semibold: 600;
+    --font-weight-regular: 400;
     --font-weight-light: 300;
-  }
 
-  /* Font Faces */
-  @font-face {
-    font-family: 'Wotfard';
-    src: url('/fonts/wotfard-regular.woff2') format('woff2');
-    font-weight: 400;
-    font-style: normal;
-  }
+    /* Colors */
+    --warm-red: hsl(14, 73%, 53%);
+    --cobalt: hsl(8, 78%, 71%);
+    --yellow: hsl(45, 91%, 62%);
+    --blue: hsl(241, 90%, 64%);
+    --blue-tint: hsl(221, 81%, 70%);
+    --green: hsl(133, 37%, 48%);
+    --purple: hsl(264, 89%, 66%);
+    --lavender: hsl(250, 87%, 85%);
+    --black: hsl(0, 0%, 0%);
+    --white: hsl(100, 100%, 100%);
+    --grey: hsl(0, 0%, 90%);
+    --background-color: var(--black);
 
-  @font-face {
-    font-family: 'Wotfard';
-    src: url('/fonts/wotfard-medium.woff2') format('woff2');
-    font-weight: 500;
-    font-style: normal;
+    /* Shadows */
+    --shadow-color: 0 0% 0%;
+    --shadow-elevation-medium:
+    0.3px 0.5px 0.7px hsl(var(--shadow-color) / 0.36),
+    0.8px 1.6px 2px -0.8px hsl(var(--shadow-color) / 0.36),
+    2.1px 4.1px 5.2px -1.7px hsl(var(--shadow-color) / 0.36),
+    5px 10px 12.6px -2.5px hsl(var(--shadow-color) / 0.36);
   }
-
-  @font-face {
-    font-family: 'Wotfard';
-    src: url('/fonts/wotfard-semibold.woff2') format('woff2');
-    font-weight: 600;
-    font-style: normal;
-  }
-
-  @font-face {
-    font-family: 'Wotfard';
-    src: url('/fonts/wotfard-bold.woff2') format('woff2');
-    font-weight: 700;
-    font-style: normal;
-  }
-
 `
 
 export {GlobalStyles}
