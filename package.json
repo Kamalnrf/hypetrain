@@ -37,6 +37,7 @@
     "styled-components": "^5"
   },
   "dependencies": {
+    "@feedback-fish/react": "^1.2.1",
     "@fontsource/bungee-shade": "^4.5.10",
     "@types/react-query": "^1.2.9",
     "react": "^18.2.0",
