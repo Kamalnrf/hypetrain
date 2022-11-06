@@ -46,13 +46,13 @@ export default function CallBackPage() {
         <h1>Completing Authorization</h1>
       ) : (
         <h1>
-          {isSuccess ? 'Authorization Compeleted' : 'Authorziation Failed'}
+          {isSuccess ? 'Authorization Compeleted' : 'Authorization Failed'}
         </h1>
       )}
       {isError ? (
         <div>
           <p>{error.error.message}</p>
-          <p>Try Signing in with Twitter Again</p>
+          <p>Try signing in with Twitter again</p>
           <SignInButton />
         </div>
       ) : (

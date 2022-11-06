@@ -1,22 +1,32 @@
 import styled from 'styled-components'
-import {ReactComponent as ExternalLink} from './external-link.svg'
+import {ReactComponent as ExternalLinkForKamal} from '../../assets/external-link-kamal.svg'
+import {ReactComponent as ExternalLinkForVishal} from '../../assets/external-link-vishal.svg'
+import {ReactComponent as UnderlineForKamal} from '../../assets/underline-kamal.svg'
+import {ReactComponent as UnderlineForVishal} from '../../assets/underline-vishal.svg'
+import {QUERIES} from '../../constants'
 
 const Footer = () => {
   return (
     <Wrapper>
       <PersonalCredits>
-        Made by&nbsp;
+        made by&nbsp;
         <NameLink href="https://twitter.com/kamalnrf">
-          Kamal
-          <ExternalLink />
+          <Name>
+            kamal
+            <UnderlineForKamal />
+          </Name>
+          <ExternalLinkForKamal />
         </NameLink>
         &nbsp;
       </PersonalCredits>
       <PersonalCredits>
         and&nbsp;
         <NameLink href="https://twitter.com/vishalxk_">
-          Vishal
-          <ExternalLink />
+          <Name>
+            vishal
+            <UnderlineForVishal />
+          </Name>
+          <ExternalLinkForVishal />
         </NameLink>
       </PersonalCredits>
     </Wrapper>
@@ -25,19 +35,35 @@ const Footer = () => {
 
 const Wrapper = styled.footer`
   display: flex;
-  position: fixed;
-  bottom: 24px;
-  right: 32px;
+  justify-content: center;
+  margin-block-end: 8px;
 `
 
 const PersonalCredits = styled.p`
   display: flex;
+  font-weight: var(--font-weight-regular);
+  font-size: 1rem;
+  color: var(--white);
+
+  media ${QUERIES.mobile} {
+    font-size: 0.5rem;
+  }
 `
 
 const NameLink = styled.a`
   display: flex;
   align-items: center;
   gap: 4px;
+  color: inherit;
+  text-decoration: none;
+  position: relative;
+`
+
+const Name = styled.span`
+  svg {
+    position: absolute;
+    bottom: 1px;
+  }
 `
 
 export {Footer}

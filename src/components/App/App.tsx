@@ -2,7 +2,6 @@ import React from 'react'
 import {GlobalStyles} from '../GobalStyles'
 import {UserProvider} from '../UserProvider'
 import {AppRouter as Router} from '../AppRouter'
-import {Footer} from '../Footer'
 import {BrowserRouter} from 'react-router-dom'
 import {QueryClient, QueryClientProvider} from 'react-query'
 
@@ -13,9 +12,8 @@ function App() {
     <BrowserRouter>
       <QueryClientProvider client={queryClient}>
         <UserProvider>
-          <Router />
-          <Footer />
           <GlobalStyles />
+          <Router />
         </UserProvider>
       </QueryClientProvider>
     </BrowserRouter>

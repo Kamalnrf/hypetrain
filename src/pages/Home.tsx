@@ -1,55 +1,85 @@
 import {Link} from 'react-router-dom'
-import {useUser} from '../components/UserProvider'
 import styled from 'styled-components'
-import '@fontsource/bungee-shade'
+import {ReactComponent as FavoriteIcon} from '../assets/favorite.svg'
+import {ReactComponent as RetweetIcon} from '../assets/retweet.svg'
+import {ReactComponent as ActivityIcon} from '../assets/activity.svg'
+import {ReactComponent as ShareIcon} from '../assets/share.svg'
+import {QUERIES} from '../constants'
 
-export default function Home() {
-  const {logout, username} = useUser()
+function Home() {
   const tweetIntent =
     'https://twitter.com/intent/tweet?text=yo%2C%20you%20should%20all%20get%20onboard%20the%20hypetrain%21%20cool%20stuff%20%3A%29'
+
   return (
-    <>
-      <Greetings>
-        Hello,
-        <Newline />
-        <Name>@{username}!</Name>
-      </Greetings>
-      <InteractiveText>
-        Welcome to the circus. Did you change your mind about retweeting and
-        favoriting tweets of all your fellow clowns? No? Are you possibly here
-        to <Link to="/activity">see all our clowning?</Link>
-      </InteractiveText>
-      <InteractiveText>
-        Do you love your fellow clowns enough to{' '}
-        <a href={tweetIntent}>share about circus?</a> Or, did you want to offer
-        us some feedback? Nothing? Sure, go ahead and{' '}
-        <Link to="/" onClick={logout}>
-          logout
-        </Link>
-        . Wait, don’t tell us you wish to leave the circus? Do you really want
-        to DELETE your account?
-      </InteractiveText>
-    </>
+    <Actions>
+      <ItemWrapper>
+        <IconContainer>
+          <FavoriteIcon width={108} />
+        </IconContainer>
+        favorite
+      </ItemWrapper>
+      <ItemWrapper>
+        <IconContainer>
+          <RetweetIcon width={108} />
+        </IconContainer>
+        retweet
+      </ItemWrapper>
+      <StyledLink to={'./activity'}>
+        <ItemWrapper>
+          <IconContainer>
+            <ActivityIcon width={108} />
+          </IconContainer>
+          activity
+        </ItemWrapper>
+      </StyledLink>
+      <TweetLink href={tweetIntent}>
+        <ItemWrapper>
+          <IconContainer>
+            <ShareIcon width={108} />
+          </IconContainer>
+          share
+        </ItemWrapper>
+      </TweetLink>
+    </Actions>
   )
 }
 
-const Greetings = styled.h1`
-  font-family: 'Bungee Shade', cursive;
-  font-weight: normal;
-  font-size: calc(84 / 16 * 1rem);
-  line-height: 1;
-  margin-block-end: 48px;
+const Actions = styled.div`
+  color: var(--white);
+  font-size: 3rem;
+
+  @media ${QUERIES.mobile} {
+    font-size: 1.5rem;
+  }
 `
 
-const Newline = styled.br``
-
-const Name = styled.div`
-  font-size: calc(96 / 16 * 1rem);
+const ItemWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  margin-block-end: 32px;
 `
 
-const InteractiveText = styled.p`
-  font-size: calc(26 / 16 * 1rem);
-  font-weight: 300;
-  line-height: 2;
-  margin-block-end: 36px;
+const IconContainer = styled.div`
+  max-width: 108px;
+  height: 72px;
+  margin-inline-end: 24px;
+
+  @media ${QUERIES.mobile} {
+    display: flex;
+    align-items: center;
+    width: 76px;
+    height: 48px;
+  }
 `
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: inherit;
+`
+
+const TweetLink = styled.a`
+  text-decoration: none;
+  color: inherit;
+`
+
+export default Home

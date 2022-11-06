@@ -4,8 +4,11 @@ import Callback from '../../pages/Callback'
 import NotFound from '../../pages/NotFound'
 import Home from '../../pages/Home'
 import Activity from '../../pages/Activity'
+import Account from '../../pages/Account'
+import Help from '../../pages/Help'
+import {Layout} from '../Layout'
 import {useUser} from '../UserProvider'
-import {MaxWidthWrapper} from '../MaxWidthWrapper'
+import {DashboardLayout} from '../DashboardLayout'
 
 function UnAuthenticatedRoutes() {
   return (
@@ -19,28 +22,19 @@ function UnAuthenticatedRoutes() {
 
 function AuthenticatedRoutes() {
   const {username} = useUser()
-
   return (
     <Layout>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path={`/${username}`} element={<Home />} />
+        <Route path="/" element={<DashboardLayout />}>
+          <Route index element={<Home />} />
+          <Route path={`/${username}`} element={<Home />} />
+          <Route path={'/account'} element={<Account />} />
+        </Route>
         <Route path="/activity" element={<Activity />} />
+        <Route path="/help" element={<Help />} />
         <Route path="/*" element={<NotFound />} />
       </Routes>
     </Layout>
-  )
-}
-
-type LayoutProps = {
-  children: React.ReactNode
-}
-
-function Layout({children}: LayoutProps) {
-  return (
-    <MaxWidthWrapper>
-      <main>{children}</main>
-    </MaxWidthWrapper>
   )
 }
 
