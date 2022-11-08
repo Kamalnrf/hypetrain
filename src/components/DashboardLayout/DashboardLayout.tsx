@@ -3,7 +3,6 @@ import {Footer} from '../Footer'
 import {Outlet} from 'react-router-dom'
 import {useLayoutEffect} from 'react'
 import styled from 'styled-components'
-import {QUERIES} from '../../constants'
 
 function DashboardLayout() {
   useLayoutEffect(() => {
@@ -30,10 +29,6 @@ const Wrapper = styled.section`
   display: flex;
   flex-direction: column;
   height: 100%;
-
-  @media ${QUERIES.mobile} {
-    margin-inline-start: 32px;
-  }
 `
 
 const FooterWrapper = styled.div`
