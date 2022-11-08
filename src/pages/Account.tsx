@@ -17,7 +17,7 @@ export default function Home() {
       </ItemWrapper>
       <ItemWrapper>
         <IconContainer>
-          <StyledDeleteIcon width={84} />
+          <DeleteIcon width={84} />
         </IconContainer>
         delete
       </ItemWrapper>
@@ -38,23 +38,15 @@ const Actions = styled.div`
 const ItemWrapper = styled.div`
   display: flex;
   align-items: center;
-  margin-block-end: 12px;
 `
 
 const IconContainer = styled.div`
   width: 92px;
-  height: 80px;
   margin-inline-end: 24px;
 
   @media ${QUERIES.mobile} {
     display: flex;
     align-items: center;
-    width: 76px;
-    height: 48px;
+    width: 64px;
   }
-`
-
-const StyledDeleteIcon = styled(DeleteIcon)`
-  margin-block-start: -24px;
-  margin-inline-end: -20px;
 `
