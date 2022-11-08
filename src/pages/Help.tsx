@@ -8,12 +8,12 @@ import {ReactComponent as Retweet} from '../assets/retweet.svg'
 import {ReactComponent as Activity} from '../assets/activity.svg'
 import {ReactComponent as Share} from '../assets/share.svg'
 import {ReactComponent as Feedback} from '../assets/feedback.svg'
-import {ReactComponent as LeftHighlight} from '../assets/left-highlight.svg'
-import {ReactComponent as RightHighlight} from '../assets/right-highlight.svg'
 import {QUERIES} from '../constants'
+import {useUser} from '../components/UserProvider'
 
 function Help() {
   const navigate = useNavigate()
+  const {username} = useUser()
   useLayoutEffect(() => {
     document.documentElement.style.setProperty(
       '--background-color',
@@ -35,43 +35,38 @@ function Help() {
         <StyledHelpIcon width={75} height={128} />
         <CloseIconContainer>
           <Link to={'/'} onClick={goBack}>
-            <CloseIcon width={56} height={48} />
+            <CloseIcon height={32} />
           </Link>
         </CloseIconContainer>
       </Header>
       <MainText>
         this is an interactive playground. click{' '}
         <IconContainer>
-          <Favorite width={52} height={48} />
+          <Favorite width={'auto'} height={40} />
         </IconContainer>{' '}
         or{' '}
         <IconContainer>
-          <Retweet width={74} height={48} />
+          <Retweet width={'auto'} height={40} />
         </IconContainer>{' '}
         to toggle favorites or retweets,{' '}
         <IconContainer>
-          <Activity width={76} height={48} />
+          <Activity width={'auto'} height={40} />
         </IconContainer>{' '}
         to see your activity,{' '}
         <IconContainer>
-          <Share width={77} height={48} />{' '}
+          <Share width={'auto'} height={36} />{' '}
         </IconContainer>{' '}
         to tweet about us,{' '}
         <IconContainer>
-          <Feedback width={50} height={48} />{' '}
+          <Feedback width={'auto'} height={40} />{' '}
         </IconContainer>{' '}
         to offer feedback, and{' '}
         <IconContainer>
-          <HelpIcon width={28} height={48} />{' '}
+          <HelpIcon width={'auto'} height={40} />{' '}
         </IconContainer>{' '}
         for help.
         <Spacer />
-        to logout or delete your account, click{' '}
-        <Name>
-          <StyledLeftHighlight width={29} height={32} />
-          @vishalxk!
-          <StyledRightHighlight width={30} height={33} />
-        </Name>
+        to logout or delete your account, click <Name>@{username}!</Name>
       </MainText>
     </>
   )
@@ -82,54 +77,58 @@ const Header = styled.header`
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  margin-block-start: 80px;
   margin-block-end: 48px;
 `
 
 const CloseIconContainer = styled.div`
-  margin-block-start: 8px;
+  margin-block-start: calc(80px + 8px);
+
+  @media ${QUERIES.mobile} {
+    margin-inline-start: -32px;
+    margin-block-start: 24px;
+
+    svg {
+      height: 24px;
+    }
+  }
 `
 
 const StyledHelpIcon = styled(HelpIcon)`
   border: 1px solid black;
+  margin-block-start: 80px;
+
+  @media ${QUERIES.mobile} {
+    height: 96px;
+    margin-block-start: 64px;
+  }
+`
+
+const Name = styled.div`
+  color: var(--lavender);
+  font-weight: var(--font-weight-semibold);
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 14ch;
+  max-width: 100%;
+  width: fit-content;
 `
 
 const MainText = styled.main`
-  font-size: 2.4rem;
+  font-size: 2rem;
   line-height: 1.35;
 
   @media ${QUERIES.mobile} {
     font-size: 1.5rem;
 
     svg {
-      height: 32px;
-      width: fit-content;
+      height: 28px;
     }
   }
 `
 
 const IconContainer = styled.div`
   display: inline-block;
-  margin-bottom: -10px;
-`
-
-const Name = styled.div`
-  display: inline-block;
-  color: var(--lavender);
-  font-weight: var(--font-weight-semibold);
-  position: relative;
-  margin-inline-start: 8px;
-`
-
-const StyledLeftHighlight = styled(LeftHighlight)`
-  position: absolute;
-  left: -16px;
-`
-
-const StyledRightHighlight = styled(RightHighlight)`
-  position: absolute;
-  left: 188px;
-  top: -4px;
+  margin-bottom: -8px;
 `
 
 const Spacer = styled.div`
