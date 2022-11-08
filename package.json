@@ -39,6 +39,8 @@
   "dependencies": {
     "@feedback-fish/react": "^1.2.1",
     "@fontsource/bungee-shade": "^4.5.10",
+    "@sentry/react": "^7.18.0",
+    "@sentry/tracing": "^7.18.0",
     "@types/react-query": "^1.2.9",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

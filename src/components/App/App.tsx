@@ -4,19 +4,22 @@ import {UserProvider} from '../UserProvider'
 import {AppRouter as Router} from '../AppRouter'
 import {BrowserRouter} from 'react-router-dom'
 import {QueryClient, QueryClientProvider} from 'react-query'
+import {ErrorBoundary} from '@sentry/react'
 
 const queryClient = new QueryClient()
 
 function App() {
   return (
-    <BrowserRouter>
-      <QueryClientProvider client={queryClient}>
-        <UserProvider>
-          <GlobalStyles />
-          <Router />
-        </UserProvider>
-      </QueryClientProvider>
-    </BrowserRouter>
+    <ErrorBoundary showDialog>
+      <BrowserRouter>
+        <QueryClientProvider client={queryClient}>
+          <UserProvider>
+            <GlobalStyles />
+            <Router />
+          </UserProvider>
+        </QueryClientProvider>
+      </BrowserRouter>
+    </ErrorBoundary>
   )
 }
 
