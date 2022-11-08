@@ -98,7 +98,7 @@ const GlobalStyles = createGlobalStyle`
     --green: hsl(133, 37%, 48%);
     --purple: hsl(264, 89%, 66%);
     --lavender: hsl(250, 87%, 85%);
-    --black: hsl(0, 0%, 0%);
+    --black: hsl(0, 0%, 5%);
     --white: hsl(100, 100%, 100%);
     --grey: hsl(0, 0%, 90%);
     --background-color: var(--black);

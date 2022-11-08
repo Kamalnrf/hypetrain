@@ -31,14 +31,14 @@ export default function CallBackPage() {
       onSuccess: res => {
         if (res.success) {
           setUserDetails(res.data)
-          navigate(`/${res.data.username}`)
+          navigate(`/`, {
+            replace: true,
+          })
         }
       },
       enabled: Boolean(code),
     },
   )
-
-  console.log(isSuccess, isLoading, error)
 
   return (
     <MaxWidthWrapper>
