@@ -1,33 +1,47 @@
 import {Link} from 'react-router-dom'
+import {useState} from 'react'
 import styled from 'styled-components'
 import {ReactComponent as FavoriteIcon} from '../assets/favorite.svg'
+import {ReactComponent as FavoriteDisabledIcon} from '../assets/favorite-disabled.svg'
 import {ReactComponent as RetweetIcon} from '../assets/retweet.svg'
+import {ReactComponent as RetweetDisabledIcon} from '../assets/retweet-disabled.svg'
 import {ReactComponent as ActivityIcon} from '../assets/activity.svg'
 import {ReactComponent as ShareIcon} from '../assets/share.svg'
 import {QUERIES} from '../constants'
 
 function Home() {
+  const [favorite, setFavorite] = useState(true)
+  const [retweet, setRetweet] = useState(true)
+
   const tweetIntent =
     'https://twitter.com/intent/tweet?text=yo%2C%20you%20should%20all%20get%20onboard%20the%20hypetrain%21%20cool%20stuff%20%3A%29'
 
   return (
     <Actions>
-      <ItemWrapper>
+      <ItemWrapper onClick={() => setFavorite(!favorite)}>
         <IconContainer>
-          <FavoriteIcon width={108} />
+          {favorite ? (
+            <FavoriteIcon height={60} width={60} />
+          ) : (
+            <FavoriteDisabledIcon height={60} width={60} />
+          )}
         </IconContainer>
         favorite
       </ItemWrapper>
-      <ItemWrapper>
+      <ItemWrapper onClick={() => setRetweet(!retweet)}>
         <IconContainer>
-          <RetweetIcon width={108} />
+          {retweet ? (
+            <RetweetIcon width={84} />
+          ) : (
+            <RetweetDisabledIcon width={84} />
+          )}
         </IconContainer>
         retweet
       </ItemWrapper>
       <StyledLink to={'./activity'}>
         <ItemWrapper>
           <IconContainer>
-            <ActivityIcon width={108} />
+            <ActivityIcon width={72} />
           </IconContainer>
           activity
         </ItemWrapper>
@@ -35,7 +49,7 @@ function Home() {
       <TweetLink href={tweetIntent}>
         <ItemWrapper>
           <IconContainer>
-            <ShareIcon width={108} />
+            <ShareIcon width={72} />
           </IconContainer>
           share
         </ItemWrapper>
@@ -46,29 +60,39 @@ function Home() {
 
 const Actions = styled.div`
   color: var(--white);
-  font-size: 3rem;
+  font-size: 2rem;
 
   @media ${QUERIES.mobile} {
     font-size: 1.5rem;
+    margin-inline-start: 16px;
   }
 `
 
 const ItemWrapper = styled.div`
   display: flex;
   align-items: center;
-  margin-block-end: 32px;
+  margin-block-end: 12px;
+
+  @media ${QUERIES.mobile} {
+    margin-block-end: 24px;
+  }
 `
 
 const IconContainer = styled.div`
-  max-width: 108px;
-  height: 72px;
+  width: 92px;
+  height: auto;
   margin-inline-end: 24px;
+  display: flex;
+  justify-content: center;
 
   @media ${QUERIES.mobile} {
-    display: flex;
     align-items: center;
-    width: 76px;
-    height: 48px;
+    width: 64px;
+    height: auto;
+
+    svg {
+      height: 44px;
+    }
   }
 `
 
