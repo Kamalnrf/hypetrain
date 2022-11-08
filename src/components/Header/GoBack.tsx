@@ -17,15 +17,17 @@ function GoBack() {
   }
 
   return (
-    <TextWrapper>
-      <Scribble />
-      go
+    <>
+      <TextWrapper>
+        <Scribble />
+        go
+      </TextWrapper>
       <BackButton onClick={goBack}>
         back?
         <StyledCircle />
         <StyledUnderline />
       </BackButton>
-    </TextWrapper>
+    </>
   )
 }
 
@@ -34,8 +36,6 @@ const TextWrapper = styled.h1`
   font-weight: var(--font-weight-regular);
   font-size: 4rem;
   line-height: 1.15;
-  margin-block-start: 80px;
-  margin-block-end: 48px;
   position: relative;
 
   & > svg {
@@ -47,8 +47,6 @@ const TextWrapper = styled.h1`
 
   @media ${QUERIES.mobile} {
     font-size: 3rem;
-    margin-block-start: 15vh;
-    margin-block-end: 32px;
 
     & > svg {
       width: 48px;
