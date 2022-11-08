@@ -19,7 +19,7 @@ export default function Home() {
     return () => {
       mobileMatch.removeEventListener('change', onChange)
     }
-  }, [])
+  }, [mobileMatch])
 
   return (
     <Actions>
