@@ -12,17 +12,19 @@ function Header() {
   return (
     <Wrapper>
       <Menu />
-      {!Boolean(isHome) ? (
-        <GoBack />
-      ) : (
-        <WelcomeMessage>
-          <Greetings>
-            <StyledSparkle />
-            hello,
-          </Greetings>
-          <UserName />
-        </WelcomeMessage>
-      )}
+      <HeaderWrapper>
+        {!Boolean(isHome) ? (
+          <GoBack />
+        ) : (
+          <WelcomeMessage>
+            <Greetings>
+              <StyledSparkle />
+              hello,
+            </Greetings>
+            <UserName />
+          </WelcomeMessage>
+        )}
+      </HeaderWrapper>
     </Wrapper>
   )
 }
@@ -37,18 +39,24 @@ const Wrapper = styled.div`
   }
 `
 
+const HeaderWrapper = styled.div`
+  margin-block-start: 80px;
+  margin-block-end: 32px;
+
+  @media ${QUERIES.mobile} {
+    margin-block-start: 15vh;
+    margin-block-end: 32px;
+  }
+`
+
 const WelcomeMessage = styled.h1`
   color: var(--white);
   font-weight: var(--font-weight-regular);
   font-size: 4rem;
   line-height: 1.15;
-  margin-block-start: 80px;
-  margin-block-end: 48px;
 
   @media ${QUERIES.mobile} {
     font-size: 3rem;
-    margin-block-start: 15vh;
-    margin-block-end: 32px;
   }
 `
 

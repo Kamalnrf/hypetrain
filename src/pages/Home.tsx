@@ -83,7 +83,7 @@ const IconContainer = styled.div`
   height: auto;
   margin-inline-end: 24px;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
 
   @media ${QUERIES.mobile} {
     align-items: center;
