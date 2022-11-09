@@ -3,7 +3,6 @@ import Landing from '../../pages/Landing'
 import Callback from '../../pages/Callback'
 import NotFound from '../../pages/NotFound'
 import Home from '../../pages/Home'
-import Activity from '../../pages/Activity'
 import Account from '../../pages/Account'
 import Help from '../../pages/Help'
 import {Layout} from '../Layout'
@@ -30,7 +29,6 @@ function AuthenticatedRoutes() {
           <Route path={`/${username}`} element={<Home />} />
           <Route path={'/account'} element={<Account />} />
         </Route>
-        <Route path="/activity" element={<Activity />} />
         <Route path="/help" element={<Help />} />
         <Route path="/*" element={<NotFound />} />
       </Routes>
