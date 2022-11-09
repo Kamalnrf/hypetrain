@@ -9,15 +9,16 @@ import {ReactComponent as ShareIcon} from '../assets/share.svg'
 import {QUERIES} from '../constants'
 import {useUser} from '../components/UserProvider'
 
+const HASHTAG = 'hypetrain'
+
 function Home() {
   const [favorite, setFavorite] = useState(true)
   const [retweet, setRetweet] = useState(true)
   const {username} = useUser()
-  const hashtag = 'hypetrain'
 
   const tweetIntent =
     'https://twitter.com/intent/tweet?text=yo%2C%20you%20should%20all%20get%20onboard%20the%20hypetrain%21%20cool%20stuff%20%3A%29'
-  const userActivity = `https://twitter.com/search?q=(from%3A${username})%20%23${hashtag}&src=typed_query&f=top`
+  const userActivity = `https://twitter.com/search?q=(from%3A${username})%20%23${HASHTAG}&src=typed_query&f=top`
 
   return (
     <Actions>
