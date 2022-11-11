@@ -77,6 +77,7 @@ const ItemWrapper = styled.div`
 
   @media ${QUERIES.mobile} {
     margin-block-end: 24px;
+    cursor: none;
   }
 `
 

@@ -174,8 +174,10 @@ const ItemWrapper = styled.div<Partial<StrikeProps>>`
   position: relative;
   color: ${props =>
     props.isEnabled ? 'var(--white)' : 'hsla(0, 0%, 100%, 0.5)'};
+
   @media ${QUERIES.mobile} {
     margin-block-end: 24px;
+    cursor: none;
   }
 `
 
