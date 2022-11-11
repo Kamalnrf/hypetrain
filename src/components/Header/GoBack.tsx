@@ -69,6 +69,7 @@ const BackButton = styled.button`
 
   @media ${QUERIES.mobile} {
     font-size: 3rem;
+    cursor: none;
   }
 `
 
