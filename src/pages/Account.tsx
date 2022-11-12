@@ -5,18 +5,34 @@ import {ReactComponent as LogoutIcon} from '../assets/logout.svg'
 import {ReactComponent as DeleteIcon} from '../assets/delete.svg'
 import {ReactComponent as Highlight} from '../assets/highlight.svg'
 import {ReactComponent as HappySmiley} from '../assets/smiley-happy.svg'
+import {ReactComponent as SadSmiley} from '../assets/smiley-sad.svg'
+import {ReactComponent as Underline} from '../assets/underline-vishal.svg'
+import {ReactComponent as Circle} from '../assets/circle-two.svg'
 import {QUERIES} from '../constants'
 import {Modal} from '../components/Modal'
 import {SelfDestruct} from '../components/SelfDestruct'
 
 export default function Home() {
   const mobileMatch = window.matchMedia(QUERIES.mobile)
-  const {logout} = useUser()
+  const {logout, deleteUser} = useUser()
   const [isMobile, setMobile] = useState(mobileMatch.matches)
-  const [isVisible, setVisible] = useState(false)
+  const [isVisible, setVisible] = useState({
+    logoutModal: false,
+    deleteModal: false,
+  })
 
-  function handleClick() {
-    setVisible(!isVisible)
+  function handleLogoutModal() {
+    setVisible({
+      ...isVisible,
+      logoutModal: true,
+    })
+  }
+
+  function handleDeleteModal() {
+    setVisible({
+      ...isVisible,
+      deleteModal: !isVisible.deleteModal,
+    })
   }
 
   useEffect(() => {
@@ -32,27 +48,45 @@ export default function Home() {
 
   return (
     <Actions>
-      <ItemWrapper onClick={handleClick}>
+      <ItemWrapper onClick={handleLogoutModal}>
         <IconContainer>
           <LogoutIcon width={isMobile ? 52 : 72} height={'auto'} />
         </IconContainer>
         logout
       </ItemWrapper>
-      <ItemWrapper>
+      <ItemWrapper onClick={handleDeleteModal}>
         <IconContainer>
           <DeleteIcon width={isMobile ? 64 : 84} />
         </IconContainer>
         delete
       </ItemWrapper>
-      <Modal backgroundColor="var(--white)" isVisible={isVisible}>
+      <Modal backgroundColor="var(--white)" isVisible={isVisible.logoutModal}>
         <SelfDestruct destroyAfter={3000} onComplete={logout}>
           <Wrapper>
-            <StyledHighlight />
+            <StyledLogoutHighlight />
             <LogoutIcon />
-            <Text>see you later!</Text>
+            <Text className="logout-text">see you later!</Text>
             <StyledHappySmiley />
           </Wrapper>
         </SelfDestruct>
+      </Modal>
+      <Modal backgroundColor="var(--blue)" isVisible={isVisible.deleteModal}>
+        <Wrapper>
+          <StyledDeleteHighlight />
+          <DeleteIcon width={isMobile ? 144 : 180} />
+          <Text>are you sure you want to delete your account?</Text>
+          <ResponseContainer>
+            <ButtonContainer>
+              <Button onClick={deleteUser}>yes</Button>
+              <StyledUnderline />
+            </ButtonContainer>
+            <ButtonContainer onClick={handleDeleteModal}>
+              <Button className="no-button">no</Button>
+              <StyledCircle cursor="pointer" />
+            </ButtonContainer>
+          </ResponseContainer>
+          <StyledSadSmiley />
+        </Wrapper>
       </Modal>
     </Actions>
   )
@@ -104,7 +138,7 @@ const Wrapper = styled.div`
   }
 `
 
-const StyledHighlight = styled(Highlight)`
+const StyledLogoutHighlight = styled(Highlight)`
   width: 56px;
   position: absolute;
   top: -36px;
@@ -117,9 +151,26 @@ const StyledHighlight = styled(Highlight)`
   }
 `
 
+const StyledDeleteHighlight = styled(Highlight)`
+  width: 56px;
+  position: absolute;
+  top: 4px;
+  left: -24px;
+
+  @media ${QUERIES.mobile} {
+    width: 40px;
+    top: 0px;
+    left: -16px;
+  }
+`
+
 const Text = styled.p`
-  color: var(--black);
+  color: inherit;
   margin-block-start: 24px;
+
+  &.logout-text {
+    color: var(--black);
+  }
 `
 
 const StyledHappySmiley = styled(HappySmiley)`
@@ -132,5 +183,70 @@ const StyledHappySmiley = styled(HappySmiley)`
     width: 75px;
     bottom: -56px;
     right: 0px;
+  }
+`
+
+const StyledSadSmiley = styled(SadSmiley)`
+  width: 100px;
+  position: absolute;
+  bottom: 8px;
+  right: 0px;
+
+  @media ${QUERIES.mobile} {
+    width: 75px;
+    bottom: -12px;
+    right: -12px;
+  }
+`
+
+const ResponseContainer = styled.div`
+  display: flex;
+  gap: 56px;
+  margin-block-start: 24px;
+
+  @media ${QUERIES.mobile} {
+    gap: 32px;
+  }
+`
+
+const ButtonContainer = styled.div`
+  position: relative;
+`
+
+const Button = styled.button`
+  background-color: transparent;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+  color: var(--cobalt);
+
+  &.no-button {
+    color: var(--green);
+  }
+`
+
+const StyledUnderline = styled(Underline)`
+  position: absolute;
+  width: 72px;
+  height: auto;
+  bottom: 8px;
+
+  path {
+    color: var(--yellow);
+    stroke-width: 0;
+  }
+`
+
+const StyledCircle = styled(Circle)`
+  position: absolute;
+  width: 72px;
+  height: auto;
+  bottom: 2px;
+  right: 2px;
+
+  @media ${QUERIES.mobile} {
+    bottom: 0px;
   }
 `
