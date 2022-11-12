@@ -3,7 +3,7 @@ import {useNavigate} from 'react-router-dom'
 import {client} from '../../utils/api'
 import {getUserToken} from '../../utils/getUserToken'
 import {TOKEN_LOCAL_STORAGE, USER_LOCAL_STORAGE} from '../../constants'
-import {useQuery} from 'react-query'
+import {useMutation, useQuery} from 'react-query'
 
 type UserDetails = {
   name: string
@@ -14,6 +14,7 @@ type ContextValues = {
   isUserSignedIn: boolean
   setUserDetails: (userDetails: UserDetails & {token: string}) => void
   logout: () => void
+  deleteUser: () => void
 } & Partial<UserDetails>
 
 type Props = {
@@ -46,6 +47,24 @@ function UserProvider({children}: Props) {
     navigate('/')
   }, [setUser, navigate])
 
+  const {mutate} = useMutation({
+    mutationFn() {
+      return client('deactivate', {
+        method: 'delete',
+        data: {},
+      })
+    },
+    onSuccess(deactivateUser) {
+      if (deactivateUser.success) {
+        logout()
+      }
+    },
+  })
+
+  const deleteUser = () => {
+    return mutate()
+  }
+
   useQuery('user_details', () => client<UserDetails>('me'), {
     onSuccess: res => {
       if (res.success) {
@@ -62,6 +81,7 @@ function UserProvider({children}: Props) {
     isUserSignedIn: Boolean(token),
     setUserDetails,
     logout,
+    deleteUser,
   }
 
   return <UserConext.Provider value={value}>{children}</UserConext.Provider>
