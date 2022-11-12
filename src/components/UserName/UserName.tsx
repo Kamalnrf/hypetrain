@@ -46,6 +46,7 @@ const StyledLeftHighlight = styled(LeftHighlight)`
   position: absolute;
   left: -28px;
   top: -16px;
+  color: var(--blue);
 
   @media ${QUERIES.mobile} {
     width: 32px;
@@ -59,6 +60,7 @@ const StyledRightHighlight = styled(RightHighlight)`
   position: absolute;
   right: -48px;
   top: -20px;
+  color: var(--blue);
 
   @media ${QUERIES.mobile} {
     width: 32px;
