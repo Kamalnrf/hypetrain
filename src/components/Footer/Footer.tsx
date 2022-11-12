@@ -5,9 +5,13 @@ import {ReactComponent as UnderlineForKamal} from '../../assets/underline-kamal.
 import {ReactComponent as UnderlineForVishal} from '../../assets/underline-vishal.svg'
 import {QUERIES} from '../../constants'
 
-const Footer = () => {
+type Props = {
+  className?: string
+}
+
+const Footer = ({className}: Props) => {
   return (
-    <Wrapper>
+    <Wrapper className={className}>
       <PersonalCredits>
         made by&nbsp;
         <NameLink href="https://twitter.com/kamalnrf">
@@ -24,7 +28,7 @@ const Footer = () => {
         <NameLink href="https://twitter.com/vishalxk_">
           <Name>
             vishal
-            <UnderlineForVishal />
+            <StyledUnderlineForVishal />
           </Name>
           <ExternalLinkForVishal />
         </NameLink>
@@ -64,6 +68,10 @@ const Name = styled.span`
     position: absolute;
     bottom: 1px;
   }
+`
+
+const StyledUnderlineForVishal = styled(UnderlineForVishal)`
+  color: var(--cobalt);
 `
 
 export {Footer}
