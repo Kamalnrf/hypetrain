@@ -8,6 +8,7 @@ import {ReactComponent as RetweetDisabledIcon} from '../assets/retweet-disabled.
 import {ReactComponent as RetweetStrikethrough} from '../assets/retweet-strikethrough.svg'
 import {ReactComponent as ActivityIcon} from '../assets/activity.svg'
 import {ReactComponent as ShareIcon} from '../assets/share.svg'
+import {ReactComponent as TwitterLogo} from '../assets/twitter-blue.svg'
 import {QUERIES} from '../constants'
 import {useUser} from '../components/UserProvider'
 import {useQuery, useMutation, useQueryClient} from 'react-query'
@@ -28,6 +29,8 @@ function Home() {
   const [visible, setVisible] = useState(false)
 
   const tweetIntent =
+    'https://twitter.com/intent/tweet?text=%22replace%20this%20with%20what%20you%20want%20to%20say%21%22%20%23hypetrain'
+  const shareIntent =
     'https://twitter.com/intent/tweet?text=yo%2C%20you%20should%20all%20get%20onboard%20the%20hypetrain%21%20cool%20stuff%20%3A%29'
   const userActivity = `https://twitter.com/search?q=(from%3A${username})%20%23${HASHTAG}&src=typed_query&f=top`
 
@@ -128,6 +131,14 @@ function Home() {
         <ItemWrapper isEnabled>
           <StyledLink href={tweetIntent}>
             <IconContainer>
+              <TwitterLogo width={64} />
+            </IconContainer>
+            tweet
+          </StyledLink>
+        </ItemWrapper>
+        <ItemWrapper isEnabled>
+          <StyledLink href={shareIntent}>
+            <IconContainer>
               <ShareIcon width={72} />
             </IconContainer>
             share
@@ -183,15 +194,16 @@ const ItemWrapper = styled.div<Partial<StrikeProps>>`
 
 const IconContainer = styled.div`
   width: 92px;
-  height: auto;
+  height: 84px;
   margin-inline-end: 24px;
   display: flex;
   justify-content: flex-start;
+  align-items: center;
 
   @media ${QUERIES.mobile} {
     align-items: center;
     width: 64px;
-    height: auto;
+    height: 56px;
 
     svg {
       height: 44px;
