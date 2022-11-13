@@ -214,13 +214,13 @@ const IconContainer = styled.div`
 const StyledFavoriteStrikethrough = styled(FavoriteStrikethrough)<StrikeProps>`
   display: ${props => (props.isEnabled ? 'none' : 'block')};
   position: absolute;
-  top: 24px;
+  top: 36px;
   left: -16px;
   min-width: 290px;
 
   @media ${QUERIES.mobile} {
     min-width: 210px;
-    top: 16px;
+    top: 20px;
     left: -8px;
   }
 `
@@ -234,7 +234,7 @@ const StyledRetweetStrikethrough = styled(RetweetStrikethrough)<StrikeProps>`
 
   @media ${QUERIES.mobile} {
     min-width: 210px;
-    top: 10px;
+    top: 16px;
     left: -12px;
   }
 `

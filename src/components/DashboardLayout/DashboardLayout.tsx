@@ -3,6 +3,7 @@ import {Footer} from '../Footer'
 import {Outlet} from 'react-router-dom'
 import {useLayoutEffect} from 'react'
 import styled from 'styled-components'
+import {SuperHeader} from '../SuperHeader'
 
 function DashboardLayout() {
   useLayoutEffect(() => {
@@ -14,6 +15,7 @@ function DashboardLayout() {
 
   return (
     <Wrapper>
+      <SuperHeader />
       <Header />
       <main>
         <Outlet />
