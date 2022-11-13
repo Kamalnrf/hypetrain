@@ -38,25 +38,15 @@ const scrollMobile = keyframes`
  }
 `
 
-const scrollDesktop = keyframes`
- from {
-  transform: translateX(100vw);
- }
- to {
-  transform: translateX(-100vw);
- }
-`
-
 const Text = styled.p`
   position: relative;
   font-size: 1.25rem;
-  height: 2ch;
-  white-space: nowrap;
+  text-align: center;
+
   @media ${QUERIES.mobile} {
+    white-space: nowrap;
     animation: ${scrollMobile} 15s linear infinite;
   }
-
-  animation: ${scrollDesktop} 20s linear -5s infinite;
 `
 
 const Hashtag = styled.span`
