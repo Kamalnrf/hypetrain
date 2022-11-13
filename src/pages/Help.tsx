@@ -94,7 +94,6 @@ const CloseIconContainer = styled.div`
 `
 
 const StyledHelpIcon = styled(HelpIcon)`
-  border: 1px solid black;
   margin-block-start: 80px;
 
   @media ${QUERIES.mobile} {
