@@ -40,6 +40,7 @@ const Footer = ({className}: Props) => {
 const Wrapper = styled.footer`
   display: flex;
   justify-content: center;
+  margin-block-start: 24px;
   margin-block-end: 8px;
 `
 

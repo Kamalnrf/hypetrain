@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, {createGlobalStyle} from 'styled-components'
 import {Portal} from 'react-portal'
 import {MaxWidthWrapper} from '../MaxWidthWrapper'
 
@@ -15,6 +15,7 @@ function Modal({children, backgroundColor, isVisible}: Props) {
 
   return (
     <Portal>
+      <GlobalStyles />
       <Wrapper backgroundColor={backgroundColor}>
         <MaxWidthWrapper>
           <ModalBody>{children}</ModalBody>
@@ -23,6 +24,16 @@ function Modal({children, backgroundColor, isVisible}: Props) {
     </Portal>
   )
 }
+
+const GlobalStyles = createGlobalStyle`
+  body {
+    overflow: hidden;
+  }
+
+  #root {
+    display: none;
+  }
+`
 
 const Wrapper = styled.div<{backgroundColor: string}>`
   position: absolute;
