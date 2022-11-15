@@ -30,7 +30,7 @@ function Help() {
   }
 
   return (
-    <>
+    <Wrapper>
       <Header>
         <StyledHelpIcon width={75} height={128} />
         <CloseIconContainer>
@@ -68,9 +68,14 @@ function Help() {
         <Spacer />
         to logout or delete your account, click <Name>@{username}!</Name>
       </MainText>
-    </>
+    </Wrapper>
   )
 }
+
+const Wrapper = styled.div`
+  height: 100%;
+  width: 100%;
+`
 
 const Header = styled.header`
   color: var(--white);
