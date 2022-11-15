@@ -2,7 +2,6 @@ import {Header} from '../Header'
 import {Footer} from '../Footer'
 import {Outlet} from 'react-router-dom'
 import {useLayoutEffect} from 'react'
-import styled from 'styled-components'
 import {SuperHeader} from '../SuperHeader'
 
 function DashboardLayout() {
@@ -14,27 +13,19 @@ function DashboardLayout() {
   }, [])
 
   return (
-    <Wrapper>
-      <SuperHeader />
-      <Header />
-      <main>
-        <Outlet />
-      </main>
-      <FooterWrapper>
-        <Footer />
-      </FooterWrapper>
-    </Wrapper>
+    <>
+      <div>
+        <header>
+          <SuperHeader />
+          <Header />
+        </header>
+        <main>
+          <Outlet />
+        </main>
+      </div>
+      <Footer />
+    </>
   )
 }
-
-const Wrapper = styled.section`
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-`
-
-const FooterWrapper = styled.div`
-  margin-top: auto;
-`
 
 export {DashboardLayout}

@@ -49,7 +49,7 @@ const HeaderWrapper = styled.div`
   }
 `
 
-const WelcomeMessage = styled.h1`
+const WelcomeMessage = styled.div`
   color: var(--white);
   font-weight: var(--font-weight-regular);
   font-size: 4rem;

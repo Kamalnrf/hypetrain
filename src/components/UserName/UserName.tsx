@@ -11,10 +11,8 @@ function UserName() {
   return (
     <NameContainer>
       <StyledLeftHighlight />
-      <Name>
-        <StyledLink to={'account'} title={username}>
-          @{username}!
-        </StyledLink>
+      <Name to={'account'} title={username}>
+        @{username}!
       </Name>
       <StyledRightHighlight />
     </NameContainer>
@@ -24,21 +22,27 @@ function UserName() {
 const NameContainer = styled.div`
   position: relative;
   display: inline-block;
+  word-break: break-all;
+  max-width: 11.5ch;
+  width: fit-content;
+
+  @media ${QUERIES.mobile} {
+    max-width: 9.5ch;
+  }
+
+  @media ${QUERIES.sMobile} {
+    max-width: 7.5ch;
+  }
 `
 
-const StyledLink = styled(Link)`
-  text-decoration: none;
-  color: inherit;
-`
-
-const Name = styled.div`
+const Name = styled(Link)`
   color: var(--lavender);
   font-weight: var(--font-weight-semibold);
   text-overflow: ellipsis;
   overflow: hidden;
-  width: 14ch;
-  max-width: 100%;
   width: fit-content;
+  max-width: 100%;
+  text-decoration: none;
 `
 
 const StyledLeftHighlight = styled(LeftHighlight)`
