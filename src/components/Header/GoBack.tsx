@@ -17,7 +17,7 @@ function GoBack() {
   }
 
   return (
-    <>
+    <Wrapper>
       <TextWrapper>
         <Scribble />
         go
@@ -27,9 +27,13 @@ function GoBack() {
         <StyledCircle />
         <StyledUnderline />
       </BackButton>
-    </>
+    </Wrapper>
   )
 }
+
+const Wrapper = styled.div`
+  line-height: 1.15;
+`
 
 const TextWrapper = styled.h1`
   color: var(--white);
@@ -40,9 +44,10 @@ const TextWrapper = styled.h1`
 
   & > svg {
     width: 84px;
+    height: auto;
     position: absolute;
-    top: -36px;
-    left: -64px;
+    top: -16px;
+    left: -56px;
   }
 
   @media ${QUERIES.mobile} {
@@ -50,7 +55,8 @@ const TextWrapper = styled.h1`
 
     & > svg {
       width: 48px;
-      top: -40px;
+      height: auto;
+      top: -8px;
       left: -32px;
     }
   }
@@ -75,24 +81,26 @@ const BackButton = styled.button`
 
 const StyledCircle = styled(Circle)`
   position: absolute;
-  top: -48px;
+  top: -8px;
   left: -16px;
   width: 210px;
+  height: auto;
 
   @media ${QUERIES.mobile} {
-    top: -56px;
-    left: -16px;
+    top: -12px;
+    left: -10px;
   }
 `
 
 const StyledUnderline = styled(Underline)`
   position: absolute;
-  top: 64px;
+  top: 72px;
   left: -32px;
   width: 240px;
+  height: auto;
 
   @media ${QUERIES.mobile} {
-    top: 44px;
+    top: 52px;
     left: -28px;
   }
 `

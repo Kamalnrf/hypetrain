@@ -117,12 +117,16 @@ const ItemWrapper = styled.div`
 
 const IconContainer = styled.div`
   width: 92px;
+  height: 84px;
   margin-inline-end: 24px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 
   @media ${QUERIES.mobile} {
-    display: flex;
     align-items: center;
     width: 64px;
+    height: 56px;
   }
 `
 
