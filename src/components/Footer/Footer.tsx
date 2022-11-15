@@ -14,7 +14,7 @@ const Footer = ({className}: Props) => {
     <Wrapper className={className}>
       <PersonalCredits>
         made by&nbsp;
-        <NameLink href="https://twitter.com/kamalnrf">
+        <NameLink href="https://twitter.com/kamalnrf" target={'_blank'}>
           <Name>
             kamal
             <UnderlineForKamal />
@@ -25,7 +25,7 @@ const Footer = ({className}: Props) => {
       </PersonalCredits>
       <PersonalCredits>
         and&nbsp;
-        <NameLink href="https://twitter.com/vishalxk_">
+        <NameLink href="https://twitter.com/vishalxk_" target={'_blank'}>
           <Name>
             vishal
             <StyledUnderlineForVishal />
@@ -40,6 +40,7 @@ const Footer = ({className}: Props) => {
 const Wrapper = styled.footer`
   display: flex;
   justify-content: center;
+  margin-block-start: 24px;
   margin-block-end: 8px;
 `
 

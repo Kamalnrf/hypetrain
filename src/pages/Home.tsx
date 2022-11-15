@@ -121,7 +121,7 @@ function Home() {
           />
         </ItemWrapper>
         <ItemWrapper isEnabled>
-          <StyledLink href={userActivity}>
+          <StyledLink href={userActivity} target={'_blank'}>
             <IconContainer>
               <ActivityIcon width={72} />
             </IconContainer>
@@ -129,7 +129,7 @@ function Home() {
           </StyledLink>
         </ItemWrapper>
         <ItemWrapper isEnabled>
-          <StyledLink href={tweetIntent}>
+          <StyledLink href={tweetIntent} target={'_blank'}>
             <IconContainer>
               <TwitterLogo width={64} />
             </IconContainer>
@@ -137,7 +137,7 @@ function Home() {
           </StyledLink>
         </ItemWrapper>
         <ItemWrapper isEnabled>
-          <StyledLink href={shareIntent}>
+          <StyledLink href={shareIntent} target={'_blank'}>
             <IconContainer>
               <ShareIcon width={72} />
             </IconContainer>
