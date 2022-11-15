@@ -45,6 +45,7 @@ const JoinButton = styled.button`
   border-radius: 10000px;
   background-color: var(--green);
   cursor: pointer;
+  color: white;
 
   @media ${QUERIES.mobile} {
     font-size: 1.5rem;
